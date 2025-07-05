@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -73,11 +72,6 @@
   </p>
 </div>
 
-<audio id="bgm" src="vietnam_oi.mp3" loop></audio>
-<audio id="correctSound" src="correct.mp3"></audio>
-<audio id="wrongSound" src="wrong.mp3"></audio>
-<audio id="victorySound" src="victory.mp3"></audio>
-
 <div id="login-box" class="box">
   <h2>🎓 Đố Vui Lịch Sử</h2>
   <p>Nhập tên để bắt đầu:</p>
@@ -109,7 +103,6 @@ const questions = [
 let current = 0;
 let score = 0;
 let playerName = "";
-let isBgmPlaying = true;
 
 function startGame() {
   const nameInput = document.getElementById("playerName").value.trim();
@@ -129,10 +122,6 @@ function startGame() {
   document.getElementById("game-box").style.display = "block";
   document.getElementById("leaderboard").style.display = "block";
   document.getElementById("greeting").textContent = `Chào ${playerName} 👋`;
-
-  const bgm = document.getElementById("bgm");
-  bgm.volume = 0.2;
-  bgm.play().catch(e => console.log(e));
 
   loadQuestion();
   showLeaderboard();
@@ -157,8 +146,6 @@ function checkAnswer(selected) {
   const q = questions[current];
   const result = document.getElementById("result");
   if (selected === q.correct) {
-    document.getElementById("correctSound").volume = 0.4;
-    document.getElementById("correctSound").play();
     result.textContent = "✅ Chính xác!";
     result.style.color = "#00e676";
     score++;
@@ -172,8 +159,6 @@ function checkAnswer(selected) {
       }
     }, 1000);
   } else {
-    document.getElementById("wrongSound").volume = 0.4;
-    document.getElementById("wrongSound").play();
     result.textContent = "❌ Sai rồi! Trò chơi sẽ bắt đầu lại...";
     result.style.color = "#ff5252";
     setTimeout(() => {
@@ -198,8 +183,6 @@ function showFinal() {
   document.getElementById("question").textContent = "🎉 Bạn đã hoàn thành!";
   document.getElementById("answers").innerHTML = "";
   document.getElementById("result").innerHTML = `✅ ${playerName}, bạn đạt ${score}/${questions.length} điểm!`;
-  document.getElementById("victorySound").volume = 0.5;
-  document.getElementById("victorySound").play();
   saveScore();
 }
 
@@ -223,4 +206,4 @@ function showLeaderboard() {
 </footer>
 
 </body>
-</html>
+  </html>
